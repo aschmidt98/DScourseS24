@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{PS3 Schmidt}
+\author{akeaneschmidt1998 }
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Question 6 Deliverables}
+1. The .csv insurance file was approximately 5 MB, although the zipped package was 846 KB.
+
+2. The .csv file had 36635 lines before the EoL conversion. 
+
+3. After the EoL conversion, the .csv file had 36635 lines.
+\end{document}
