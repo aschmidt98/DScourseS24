@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{PS4_Schmidt}
+\author{akeaneschmidt1998 }
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Possible Data Sources}
+
+    -10K Reports
+
+-Twitter posts about politicians buying stocks
+
+\section{Data Source Uses}
+I'm interested in Network Theory, so I think it would be interesting to scrape 10K reports. My hope here is to then find some way to scrape through 10Ks (maybe by processing them into plain text via ChatGPT) and figure out what effects the expansion of one company has on another- do they form strategic alliances, or do they undercut each other? I could also cross-reference this by industry (I have access to a database which classifies companies by their SIC code).
+
+I'm also interested in using MarketWatch data (there is a Twitter for it, but I think it may have a more direct source which isn't restricted by the Twitter API) to find out what happens to a stock once a politician buys it. Do people assume a stock is good because someone with presumably insider information buys it?
+\end{document}
