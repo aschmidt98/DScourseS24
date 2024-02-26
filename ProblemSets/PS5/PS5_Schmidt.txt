@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{PS5_Schmidt}
+\author{akeaneschmidt1998 }
+\date{February 2024}
+
+\begin{document}
+ 
+\maketitle
+
+\section{Harvested Data (No API)}
+I selected the crime data for agencies (i.e. incorporated towns) in Oklahoma. I thought it might be interesting to assess an imbalance in policing policies for comparably sized, nearby towns- one of which is in state territory, one of which is in reservation territory. 
+
+I grabbed the town's name, population, total offenses, offense rate by population, violent crimes, violent crime rate by population, property crimes, and property crime rate by population.
+
+Long-term I'd like to see what the Supreme Court ruling did in this effect. I'm not sure it's directly useful for my research, but I plan to use it for another class I'm taking on hierarchical modelling. I think it might be able to capture multiple effects and clarify the degree to which crime across the intrastate border has improved or worsened as a result of the ruling. I didn't use any online tutorials specifically, but I used ChatGPT to troubleshoot error codes and the like.
+
+\section{Harvested Data (API)}
+I used the R-standard "httr" package to interact with the webpage. I also used jsonlite to create a dataframe I felt more comfortable working with.
+
+This left me with a currency exchange rate. I could pay for API access to the historical data, but I suspect it could be found already tabulated for free elsewhere. It might be cool to load it up using a program that activates when I start my computer, though. Then I could track daily fluctuations over time myself and autogenerate a table.
+\end{document}
