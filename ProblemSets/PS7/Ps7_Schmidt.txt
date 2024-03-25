@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{geometry}
+
+% Set the left margin to 2 inches and the right margin to 1 inch
+\geometry{left=1in, right=1in}
+
+\title{PS7_Schmidt}
+\author{akeaneschmidt1998 }
+\date{March 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Q: At what rate are log wages missing? Do you think the logwage variable is most likely to be MCAR, MAR, or MNAR?
+
+A: The missing rate is 0.24933, so approximately one instance in four is missing this data. I think it's most likely MNAR- I hypothesize that people who are uncomfortable with the amount they make (either being bashful about it being too high, or ashamed of it being low) will not report it. So I think both the left and right tail are under reported.
+
+\vspace{12pt}
+
+Q: Tell me about the progress you’ve made on your project. What data are you using?
+What kinds of modeling approaches do you think you’re going to take?
+
+A: I decided to go with the data on Oklahoma crime rates. I think I'm making progress, especially in another class- I'm taking an EIPT class on hierarchical linear models, so I'm thinking it might be interesting to examine different facets that feed into various crime rates- for instance, maybe population only APPEARS to correlate with crime rate, but in reality it's a minor correlation once you control for proverty rate, which itself correlates with each. 
+
+\vspace{12pt}
+
+\section{Summary Table of the Cleaned Data Frame and Multiple Imputation Table}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{lrrrrrrr}
+\toprule
+  & Unique & Missing Pct. & Mean & SD & Min & Median & Max\\
+\midrule
+logwage & 669 & 0 & \num{1.6} & \num{0.4} & \num{0.0} & \num{1.7} & \num{2.3}\\
+hgc & 16 & 0 & \num{12.6} & \num{2.3} & \num{0.0} & \num{12.0} & \num{18.0}\\
+tenure & 233 & 0 & \num{5.2} & \num{5.1} & \num{0.0} & \num{3.3} & \num{24.8}\\
+age & 12 & 0 & \num{39.2} & \num{3.1} & \num{34.0} & \num{39.0} & \num{45.0}\\
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{table}
+\begin{tabular}[t]{lcccc}
+\toprule
+  & Complete Cases & Mean Imputation & Predicted Imputation & Multiple Imputation\\
+\midrule
+(Intercept) & \num{0.534} & \num{0.708} & \num{0.534} & \num{0.667}\\
+ & (\num{0.146}) & (\num{0.116}) & (\num{0.112}) & (\num{0.130})\\
+hgc & \num{0.062} & \num{0.050} & \num{0.062} & \num{0.058}\\
+ & (\num{0.005}) & (\num{0.004}) & (\num{0.004}) & \vphantom{1} (\num{0.005})\\
+collegenot college grad & \num{0.145} & \num{0.169} & \num{0.145} & \num{0.105}\\
+ & (\num{0.034}) & (\num{0.026}) & (\num{0.025}) & (\num{0.030})\\
+tenure & \num{0.050} & \num{0.038} & \num{0.050} & \num{0.044}\\
+ & (\num{0.005}) & (\num{0.004}) & (\num{0.004}) & (\num{0.005})\\
+I(tenure\textasciicircum{}2) & \num{-0.002} & \num{-0.001} & \num{-0.002} & \num{-0.001}\\
+ & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000})\\
+age & \num{0.000} & \num{0.000} & \num{0.000} & \num{-0.001}\\
+ & (\num{0.003}) & (\num{0.002}) & (\num{0.002}) & (\num{0.003})\\
+marriedsingle & \num{-0.022} & \num{-0.027} & \num{-0.022} & \num{-0.021}\\
+ & (\num{0.018}) & (\num{0.014}) & (\num{0.013}) & (\num{0.016})\\
+\midrule
+Num.Obs. & \num{1669} & \num{2229} & \num{2229} & \num{2246}\\
+Num.Imp. &  &  &  & \num{5}\\
+R2 & \num{0.208} & \num{0.146} & \num{0.277} & \num{0.226}\\
+R2 Adj. & \num{0.206} & \num{0.144} & \num{0.275} & \num{0.224}\\
+AIC & \num{1179.9} & \num{1093.8} & \num{925.5} & \\
+BIC & \num{1223.2} & \num{1139.5} & \num{971.1} & \\
+Log.Lik. & \num{-581.936} & \num{-538.912} & \num{-454.737} & \\
+RMSE & \num{0.34} & \num{0.31} & \num{0.30} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{document}
