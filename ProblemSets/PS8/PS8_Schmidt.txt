@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
+\usepackage{float} % Required for table positioning
+
+\title{PS8\_Schmidt}
+\author{akeaneschmidt1998}
+\date{April 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Discussion}
+The ground truth beta values were 
+
+$\beta = [1.5, -1, -0.25, 0.75, 3.5, -2, 0.5, 1, 1.25, 2]$.
+
+Comparing the estimated coefficients ($\hat{\beta}$) with the "ground truth" ($\beta$), we can see that the estimates are very close to the true values. The differences are minor and seem to be attributable to the random noise ($\epsilon$) added to the data.
+
+\begin{table}[H]
+\centering
+\caption{OLS Regression Output}
+\begin{tblr}{
+  colspec = {l c},
+  row{1} = {font=\bfseries},
+  hlines,
+  vlines,
+}
+& (1) \\
+X1       & 1.501      \\
+& (0.002)    \\
+X2       & -1.001     \\
+& (0.002)    \\
+X3       & -0.252     \\
+& (0.002)    \\
+X4       & 0.749      \\
+& (0.002)    \\
+X5       & 3.501      \\
+& (0.002)    \\
+X6       & -2.001     \\
+& (0.002)    \\
+X7       & 0.499      \\
+& (0.002)    \\
+X8       & 1.003      \\
+& (0.002)    \\
+X9       & 1.247      \\
+& (0.002)    \\
+X10      & 2.001      \\
+& (0.002)    \\
+Num.Obs. & 100000     \\
+R2       & 0.991      \\
+R2 Adj.  & 0.991      \\
+AIC      & 145143.6   \\
+BIC      & 145248.3   \\
+Log.Lik. & -72560.811 \\
+RMSE     & 0.50       \\
+\end{tblr}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Comparison of True and Estimated Coefficients}
+\begin{tblr}{
+  colspec = {lcc},
+  row{1} = {font=\bfseries},
+  hlines,
+}
+Variable & True $\beta$ & Estimated $\hat{\beta}$ \\
+X1 & 1.50 & 1.501 \\
+X2 & -1.00 & -1.001 \\
+X3 & -0.25 & -0.252 \\
+X4 & 0.75 & 0.749 \\
+X5 & 3.50 & 3.501 \\
+X6 & -2.00 & -2.001 \\
+X7 & 0.50 & 0.499 \\
+X8 & 1.00 & 1.003 \\
+X9 & 1.25 & 1.247 \\
+X10 & 2.00 & 2.001 \\
+\end{tblr}
+\end{table}
+
+\end{document}
