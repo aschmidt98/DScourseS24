@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{PS9_Schmidt}
+\author{akeaneschmidt1998 }
+\date{April 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Following the example from the lecture notes, estimate a LASSO model to predict log median house value, where the penalty parameter λ is tuned by 6-fold cross validation. 
+
+Optimal value of λ = 0.002592944 
+
+In-sample RMSE=  0.1392827 
+
+Out-of-sample RMSE= 0.1820611 
+
+Estimate a ridge regression model where again
+the penalty parameter λ is tuned by 6-fold CV. 
+
+Optimal value of λ = 0.09236709 
+
+Out-of-sample RMSE= 0.1726775 
+
+\end{document}
