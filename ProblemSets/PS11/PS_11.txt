@@ -1,0 +1,253 @@
+\documentclass[12pt,english]{article}
+\usepackage{mathptmx}
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{darkblue}{RGB}{0.,0.,139.}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{lipsum}
+
+\usepackage[authoryear]{natbib}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage[flushleft]{threeparttable}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{pdflscape}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=false,
+ colorlinks,citecolor=black,filecolor=black,
+ linkcolor=black,urlcolor=black]
+ {hyperref}
+\usepackage[all]{hypcap} % Links point to top of image, builds on hyperref
+\usepackage{breakurl}    % Allows urls to wrap, including hyperref
+
+\linespread{2}
+
+\begin{document}
+
+\begin{singlespace}
+\title{Final Project Rough Draft\thanks{Acknowledgements here, if any.}}
+\end{singlespace}
+
+\author{Alex Schmidt\thanks{Department of Marketing and Supply Chain Management, University of Oklahoma.\
+E-mail~address:~\href{mailto:student.name@ou.edu}{student.name@ou.edu}}}
+
+% \date{\today}
+\date{Apr. 23, 2024}
+
+\maketitle
+
+\begin{abstract}
+\begin{singlespace}
+We analyze data on population of various townships and jurisdictions, alongside the population of the town, to investigate the claimed correlation between urbanization and criminal enterprises. To this end, data was scraped from publicly available collections, cleaned, and analyzed in RStudio. The findings of this research indicate the possibility that 
+
+We find ... 
+\end{singlespace}
+
+\end{abstract}
+\vfill{}
+
+
+\pagebreak{}
+
+\section{Artificial Intelligence Disclosure}\label{sec:intro}
+
+This paper utilized artificial intelligence as a tool for the completion of the research conducted. ChatGPT-4.0 was used in the following roles: 
+
+\begin{itemize}
+  \item Creating, troubleshooting, annotating, interpreting, and amending code, including for RStudio (which was used to harvest, clean, and interpret data, as well as to generate displays) and LaTeX (which was used to produce this document format)
+  \item Searching the internet for existing academic research\footnote{Although the hallucination rate for ChatGPT-4.0 has been dramatically reduced from previous versions, all cited research was verified in accuracy by the research team, including the references to the articles and the relevance of the claims made to the content and context of the article.}
+  \item Compiling perspectives on methodologies and arguments
+  \item Low-level mathematics and data cleaning.
+\end{itemize}
+
+The research team feels that the utilization of artificial intelligence in this project amount to the utilization of any other research tool or methodology and stands by the academic integrity of the paper. All other aspects of the paper, including the review of the literature, the selection of theories, and the interpretation of data, were fundamentally human in conduct. 
+
+\section{Introduction}
+\label{sec:intro}
+OklahomaWatch claims "From year to year, it's not generally the largest cities in Oklahoma that have the highest crime rates" (_cite). This is a popular perspective: . The FBI report from which OklahomaWatch draws data seems to support this as well: of the 20 highest violent crime rates for cities in the United States, the average violent crime rate (per 100,000 residents) was 1464.65 (FBI Report_2018), and the average population at the nearest census was 580,175 (cite_2020_census), far higher than the average violent crime rate for the United States as a whole (368.9 per 100,000). 
+
+At first glance, this would suggest a correlation between crime and population. However, a careful examination of the data and claims reveals that the data-supported statement "violent crime corresponds to high population" was inappropriately extended to the unsubstantiated claim "crime (here, including property crimes) corresponds to a high population." We extend the analysis of this information by breaking down the types of crimes and examining how the population of the reporting district affects criminality. In so doing, we seek to expand perspectives of criminality and shed light on how different factors and assumptions might drive different forms of crime.
+
+\section{Literature Review}\label{sec:litreview}
+Extant literature focusing on criminality tends to focus on ecological factors such as socioeconomic status or social institutions. Indeed, an individual-level predictor makes little sense without an adjoining theory as to why criminally predisposed individuals are attracted to cities. In particular, significant attention has been given to Strain Theory.
+
+Strain Theory is an economic perspective emphasizing the competition for resources.
+
+
+However, this opens the door for a seemingly contradictory perspective: as there are more jobs in cities (_cite) and as these jobs are generally better paid (_cite), it would seem that economic competition for resources should be reduced in densely populated areas, leading to a reduction in crime. These competing hypotheses offer paradoxical predictions. 
+
+\subsection*{Foundational Framework}
+
+The inception of Strain Theory was marked by Merton’s 1938 article, ``Social Structure and Anomie,'' where he proposed that society's structure exerts pressure on individuals to achieve culturally defined goals, often without providing adequate means (\cite{merton1938}). This discrepancy leads to strain, which can manifest in deviant behavior when the means to achieve goals are limited by the social structure.
+
+\subsection*{Extensions and Refinements}
+
+Strain Theory was further refined and extended by researchers interested in the nuances of individual reactions to societal pressures:
+
+\begin{itemize}
+    \item Cohen (1955) introduced the concept of status frustration to explain delinquency among lower-class boys who lack the means to achieve success in middle-class terms (\cite{cohen1955}).
+    \item Cloward and Ohlin (1960) expanded on this by distinguishing between different types of delinquent subcultures that arise from variations in access to illegitimate means, proposing that opportunity structures shape the forms of delinquency (\cite{cloward1960}).
+    \item Agnew (1992) significantly broadened the scope of Strain Theory with his General Strain Theory (GST), which considers a wider range of stressors beyond economic constraints, including emotional triggers and personal loss, as causes of strain (\cite{agnew1992}).
+\end{itemize}
+
+\subsection*{Contemporary Applications}
+
+Today, Strain Theory continues to influence criminological research and policy development. It is particularly relevant in studies exploring the impact of economic disparities and the effects of rapid social change on crime rates. 
+
+\section*{Data}
+
+This study utilized data extracted from the \href{https://oklahomawatch.opalstacked.com/crime/}{Oklahoma Watch website}, which provides comprehensive crime statistics across various towns within the state. The data were collected using the \texttt{rvest} package in R, facilitating the scraping of information directly from the website's crime statistics page.
+
+The variables extracted include:
+\begin{itemize}
+    \item \textbf{Town Name:} The name of the town for which crime data were reported.
+    \item \textbf{Population:} The total population of the town.
+    \item \textbf{Total Offenses:} The total number of criminal offenses reported.
+    \item \textbf{Offense Rate:} The rate of offenses per 100,000 people.
+    \item \textbf{Violent Crimes:} The count of violent crimes reported.
+    \item \textbf{Violent Crime Rate:} The rate of violent crimes per 100,000 people.
+    \item \textbf{Property Crimes:} The count of property crimes reported.
+    \item \textbf{Property Crime Rate:} The rate of property crimes per 100,000 people.
+\end{itemize}
+
+The data collection process involved identifying the appropriate CSS selectors to effectively extract each piece of information. The population and crime rates, originally in string format and often containing commas as thousand separators, were converted into numeric data types suitable for analysis. Special characters and non-numeric strings inadvertently extracted during the scraping process were cleaned and removed.
+
+Post-extraction, the processed data were stored in a structured data frame within R. Entries with missing or incomplete data were removed to maintain the integrity of the dataset. The final dataset was then saved for further analysis.
+
+The cleaned data enabled the construction of visualizations to explore relationships between population size and various crime rates, employing the \texttt{ggplot2} package. Plots were generated to display the distribution of offense, violent crime, and property crime rates across different population sizes, with additional adjustments made to exclude statistical outliers and focus on core trends.
+
+\section{Research Findings}\label{sec:results}
+OklahomaWatched claimed that "From year to year, it's not generally the largest cities in Oklahoma that have the highest crime rates." However, we find little (_do we?) support for this broad claim.
+
+\bibliographystyle{apa}
+\bibliography{references}
+
+\end{document}
+
+
+
+
+. Table \ref{tab:descriptives} contains summary statistics.
+
+\lipsum[2-5]
+
+
+\section{Empirical Methods}\label{sec:methods}
+While my approach explores a number of different approaches, the primary empirical model can be depicted in the following equation:
+
+\begin{equation}
+\label{eq:1}
+Y_{it}=\alpha_{0} + \alpha_{1}Z_{it} + \alpha_{2} X_{it} + \varepsilon,
+\end{equation}
+where $Y_{it}$ is a continuous outcome variable for unit $i$ in year $t$, and $Z_{it}$ are characteristics about the firm at which $i$ is working, while $X_{it}$ are characteristics about $i$. The parameter of interest is $\alpha_{1}$.
+
+\lipsum[1-6]
+
+ 
+
+The main results are reported in Table \ref{tab:estimates}.
+
+\lipsum[3-9]
+
+\section{Conclusion}\label{sec:conclusion}
+\lipsum[3-4]
+
+\vfill
+\pagebreak{}
+\begin{spacing}{1.0}
+\bibliographystyle{jpe}
+\bibliography{References.bib}
+\addcontentsline{toc}{section}{References}
+\end{spacing}
+
+\vfill
+\pagebreak{}
+\clearpage
+
+%========================================
+% FIGURES AND TABLES 
+%========================================
+\section*{Figures and Tables}\label{sec:figTables}
+\addcontentsline{toc}{section}{Figures and Tables}
+%----------------------------------------
+% Figure 1
+%----------------------------------------
+\begin{figure}[ht]
+\centering
+\bigskip{}
+\includegraphics[width=.9\linewidth]{fig1.eps}
+\caption{Figure caption goes here}
+\label{fig:fig1}
+\end{figure}
+
+%----------------------------------------
+% Table 1
+%----------------------------------------
+\begin{table}[ht]
+\caption{Summary Statistics of Variables of Interest}
+\label{tab:descriptives} 
+\centering
+\begin{threeparttable}
+\begin{tabular}{lcccc}
+&&&&\\
+\multicolumn{5}{l}{\emph{Panel A: Summary Statistics for Variables of Interest}}\\
+\toprule
+                                                        & Mean  & Std. Dev. & Min   & Max   \\
+\midrule
+Outcome variable 1                                      & 4.127 & 1.709     & 0.000 & 8.516 \\
+Outcome variable 2                                      & 1.293 & 0.648     & 0.000 & 0.216 \\
+Policy variable                                         & 0.685 & 0.464     & 0.000 & 1.000 \\
+Control variable 1                                      & 0.451 & 0.497     & 0.000 & 1.000 \\
+Control variable 2                                      & 0.322 & 0.467     & 0.000 & 1.000 \\
+&&&&\\
+\multicolumn{5}{l}{\emph{Panel B: Sample Means of Outcome Variables for Subgroups}}\\
+\midrule
+                                                        & Group 1 & Group 2 & Group 3 & Group 4 \\
+\midrule
+Outcome variable 1                                      & 1.782  & 2.181  & 3.749  & 4.127  \\
+Outcome variable 2                                      & 0.824  & 0.971  & 1.215  & 1.693  \\
+\midrule
+$N$                                                     & 25,796 & 75,879 & 37,157 & 33,839 \\
+\bottomrule
+\end{tabular}
+\footnotesize Notes: Put any notes about the table here. Sample size for all variables in Panel A is $N=172,671$.
+\end{threeparttable}
+\end{table}
+
+
+%----------------------------------------
+% Table 2
+%----------------------------------------
+\begin{table}[ht]
+\caption{Empirical estimates of parameter of interest}
+\label{tab:estimates} 
+\centering
+\begin{threeparttable}
+\begin{tabular}{lcc}
+\toprule
+                            & Few Controls    & Many Controls \\
+\midrule
+Variable of interest        & -1.977***       & -0.536**    \\
+                            & (0.219)         & (0.214)     \\
+Individual characteristics  & $\checkmark$    & $\checkmark$\\
+Firm characteristics        &                 & $\checkmark$\\
+Location dummies            &                 & $\checkmark$\\
+\midrule
+$N$                         & 172,671         & 172,671      \\
+\bottomrule
+\end{tabular}
+\footnotesize Notes: Table notes here. Standard errors in parentheses. ***Significantly different from zero at the 1\% level; **Significantly different from zero at the 5\% level.
+\end{threeparttable}
+\end{table}
+
+
+\end{document}
