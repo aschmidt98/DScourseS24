@@ -1,0 +1,22 @@
+##########################################
+## INSTRUCTIONS FOR REPLICATING RESULTS ##
+##########################################
+
+This folder is intended to have all of the resources needed to replicate the entirety of this project. Despite this, some tools will be needed:
+
+	* Access to RStudio
+	* Internet access
+	* API Key for the Bureau of Economic Analysis (link: https://www.bea.gov/)
+		- This API Key must be added to your RStudio environmental variables file as 
+					"US_Bureau_of_Economic_Analysis_API_Key"
+	* API Key for Wikipedia (Optional, used for currently defunct coordinate scraper)
+		- Wikipedia requires two API keys: one for the API (allowing it to be shared securely) and one for 
+		the user (allowing them to hold uders accountable for API practices). BOTH keys must be added to your 	
+		environmental variables file as follows:
+			Key for the API : "Wikipedia_Coordinate_API"
+			Key for the User: "Wikipedia_Coodrdinate_ID"
+
+
+Open "PS_Final" in RStudio. Run the entire program ([CTRL] + [A] and then [CTRL] + [ENTER]) to replicate the results. For the ease of troubleshooting, partial programs have also been saved to this folder representing the four possible sections (ex. "PS_Final_S1"). You may run these individually in order if you are having trouble, or combine them into larger sections as appropriate. All previous iterations of the code are also retained in "PS_Final_Old".
+
+All generated files are stored in the native RStudio folder (which, by default, should be "C:\Users\Username\Documents"). If you are attempting to recreate my .pdf files for my writeup and presentation, documents may need to be manually uploaded to a LaTeX processor for online applications like OverLeaf. 
