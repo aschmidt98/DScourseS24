@@ -1,0 +1,222 @@
+\documentclass{beamer}
+
+\usepackage{textcomp}  % Load textcomp package
+\usepackage{graphicx} % To include graphics
+\usepackage{tikz}
+\usepackage{xcolor} % Make sure this package is included for color definitions
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Defining Document Parameters %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define colors
+\definecolor{crimson}{RGB}{159,0,0}
+\definecolor{blackout}{RGB}{0,0,0}
+
+% Apply color settings globally
+\setbeamercolor{frametitle}{fg=crimson}
+\setbeamercolor{title}{fg=crimson}
+\setbeamercolor{subsection in head/foot}{fg=crimson}
+\setbeamercolor{item}{fg=crimson}
+\setbeamercolor{subitem}{fg=crimson}
+\setbeamercolor{label}{fg=black}
+\setbeamercolor{block title}{fg=crimson}
+
+
+\title{ECON - 5253 Presentation}
+\author{Alex Schmidt}
+\institute{Univ. of Oklahoma}
+\date{May, 2024}
+
+\begin{document}
+
+% Define title page background with images positioned
+\setbeamertemplate{background canvas}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south west, inner sep=0pt, xshift=25pt, yshift=25pt] at (current page.south west) {
+      \includegraphics[width=100pt, height=100pt]{Seal.jpg}
+    };
+    \node[anchor=south east, inner sep=0pt, xshift=-50pt, yshift=25pt] at (current page.south east) {
+      \includegraphics[height=100pt, keepaspectratio]{Logo.png}
+    };
+  \end{tikzpicture}
+}
+
+\frame{\titlepage}
+
+% To revert to a normal background for subsequent slides
+\setbeamertemplate{background canvas}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south east, inner sep=0pt, xshift=-10pt, yshift=10pt] at (current page.south east) {
+      \includegraphics[height=30pt, keepaspectratio]{Logo.png}
+    };
+  \end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 2: INTRODUCTION %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{INTRODUCTION}
+This project aimed to explore the relationship between crime rates in Oklahoma townships relative to their population and income. OklahomaWatch claims that larger towns are not significantly associated with criminality. We test several hypotheses: 
+
+\begin{itemize}
+  \item H1a: Overall crime is positively associated with population.
+  \item H1b: Overall crime is negatively associated with income.
+  \item H2a: Violent crime is positively associated with population.
+  \item H2b: Violent crime is negatively associated with income.
+  \item H3a: Property crime is positively associated with population.
+  \item H3b: Property crime is negatively associated with income.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 3: DATA COLLECTION %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{DATA COLLECTION AND DESCRIPTION}
+Data was collected from various sources, including with and without the use of an API. All data collection was completed in RStudio. 
+
+\begin{block}{Data Scraped Without API:}
+\begin{itemize}
+  \item Wikipedia (to identify the county of each town)
+  \item OklahomaWatch (Criminality of towns, including overall crime, violent crime, and property crime, and normalizing these by population)
+\end{itemize}
+\end{block}
+
+\begin{block}{Data scraped with an API:}
+\begin{itemize}
+  \item U.S. Bureau of Economic Analysis (to find the average income for each county)
+  \item Wikipedia (to find the latitude and longitude of towns)\footnote{Due to challenges in data handling, this data has not yet been integrated into the model.}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 4: METHODOLOGY %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{METHDOLOGY}
+A Hierarchical Linear Model (HLM) was employed to explore the nested aspects of the data. 
+
+\[
+\text{Rate of Crime} = \beta_0 + \beta_1 \times \text{Per Capita Income} + \beta_2 \times \text{Population} + b_{\text{County}}
+\]
+
+This model specifies that the offense rate is modeled as a function of per capita income and population, with random intercepts for each county. This means the baseline offense rate varies by county, but the effect of income and population on offense rate is assumed to be fixed across counties.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 5: RESULTS %%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{FINDINGS}
+\input{summary_offenses}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 6: RESULTS %%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{FINDINGS}
+\input{summary_violent}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 7: RESULTS %%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{FINDINGS}
+\input{summary_property}
+\end{frame}
+
+
+% To revert to a normal background for subsequent slides
+\setbeamertemplate{background canvas}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south east, inner sep=0pt, xshift=-10pt, yshift=10pt] at (current page.south east) {
+      \includegraphics[height=30pt, keepaspectratio]{Logo.png}
+    };
+  \end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 6: FINDINGS, CONT %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{FINDINGS}
+The findings indicate partial support for OklahomaWatch's claim that bigger towns are not significantly associated with crime. 
+
+\small
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{Hypth.} & \textbf{Description} & \textbf{Result} \\ \hline
+H1a & Overall crime is positively associated with population. & \textcolor{red}{X} \\ \hline
+H1b & Overall crime is negatively associated with income. & \textcolor{red}{X} \\ \hline
+H2a & Violent crime is positively associated with population. & \textcolor{red}{X} \\ \hline
+H2b & Violent crime is negatively associated with income. & \textcolor{red}{X} \\ \hline
+H3a & Property crime is positively associated with population. &  \textcolor{green}{$\checkmark$} \\ \hline
+H3b & Property crime is negatively associated with income. & \textcolor{red}{X} \\ \hline
+\end{tabular}
+\\ 
+\textcolor{white}{.}
+\\
+Table 1: Summary of Hypotheses
+\label{tab:hypotheses}
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 7: IMPLICATIONS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{IMPLICATIONS }
+\begin{block}{Policy}
+\begin{itemize}
+  \item State / County resources should be diverted to population centers
+  \item Companies should consider investing in and moving to smaller towns
+\end{itemize}
+\end{block}
+
+\begin{block}{Research}
+\begin{itemize}
+  \item Opposes Strain Theory by suggesting criminality may be based on other factors than need (such as familiarity or sense of community)
+  \item Points to future research potential, such as dividing crime into \textit{ad individuum} and \textit{ad statum}, or examining how counties aid each other based on spatial relatedness. State borders should also be considered to see if interstate dealings strain resources.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% FRAME 9: AI USAGE %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{HOW DID AI CONTRIBUTE TO THIS RESEARCH?}
+\small
+This research utilized AI, specifically ChatGPT-3.5 and 4.0, for:
+
+\begin{itemize}
+  \item Code development and troubleshooting in RStudio and LaTeX.
+  \item Internet searches for academic research\footnote{All AI-found research was verified for accuracy by the research team.}.
+  \item Advice on methodologies and argument structures.
+  \item Assisting in basic mathematics and data cleaning tasks.
+\end{itemize}
+
+The use of AI is equated to any other research tool, ensuring the paper's academic integrity. Critical intellectual processes were conducted by the human research team.
+\end{frame}
+
+\end{document}
